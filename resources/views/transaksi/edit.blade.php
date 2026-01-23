@@ -9,7 +9,8 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="m-sm-3">
-									<form>
+									<form method="POST" action="/transaksi/update/{{ $transaksiz -> id_transaksi }}">
+										@csrf
 										<div class="mb-3">
 											<label class="form-label">Tanggal</label>
 											<input class="form-control form-control-lg" type="date" name="waktu_transaksi" placeholder="Tanggal" required value="{{ $transaksiz -> waktu_transaksi }}" />
@@ -24,9 +25,17 @@
 											<input class="form-control form-control-lg" type="text" name="berat" placeholder="Berat" required value="{{ $transaksiz -> berat }}" />
 										</div>
 										<div class="mb-3">
+											<label class="form-label">Layanan</label>
+											<select class="form-control form-control-lg" type="number" name="id_layanan" placeholder="Berat" required value="{{ old ($transaksiz -> keterangan) }}">
+												@foreach ($layanans as $item)
+												<option value="{{ $item -> id_layanan }}" @if ($item -> id_layanan == $transaksiz -> id_layanan) selected @endif>{{ $item  -> nama_layanan }}</option>
+												@endforeach
+                                            </select>
+										</div>
+										<div class="mb-3">
 											<label class="form-label">Keterangan</label>
 											<select class="form-control form-control-lg" type="number" name="keterangan" placeholder="Berat" required value="{{ old ($transaksiz -> keterangan) }}">
-                                                <option value="">Masukkan Keterangan</option>
+                                                <option value="{{ $transaksiz -> keterangan }}">{{ $transaksiz-> keterangan }}</option>
                                                 <option value="Selesai">Selesai</option>
                                                 <option value="Proses">Proses</option>
                                             </select>
@@ -34,7 +43,7 @@
 										<div class="mb-3">
 											<label class="form-label">Pembayaran</label>
 											<select class="form-control form-control-lg" type="number" name="pembayaran" placeholder="Bayar" required value="{{ $transaksiz -> pembayaran }}">
-                                                <option value="">Pembayaran ?</option>
+                                                <option value="{{ $transaksiz -> pembayaran }}">{{ $transaksiz -> pembayaran }}</option>
                                                 <option value="Belum Bayar">Belum Bayar</option>
                                                 <option value="Lunas">Lunas</option>
                                             </select>

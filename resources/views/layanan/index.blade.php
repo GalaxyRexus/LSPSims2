@@ -28,7 +28,7 @@
                                 <td><span class="badge bg-success">Rp{{ number_format($item -> harga_per_kg,0,',',',') }}</span></td>
                                 <td class="d-none d-md-table-cell">
                                     <a class="btn btn-primary" href="/layanan/edit/{{ $item -> id_layanan }}">Ubah</a>
-                                    <a class="btn btn-danger" href="/layanan/destroy/{{$item -> id_layanan }}">Hapus</a>
+                                    <a class="btn btn-danger" onclick="return confirm('Apakah Iya')" href="/layanan/destroy/{{$item -> id_layanan }}">Hapus</a>
                                 </td>
                             </tr>
                             @endforeach

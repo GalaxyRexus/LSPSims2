@@ -13,7 +13,7 @@ class LayananController extends Controller
     public function index()
     {
         $layanans = Layanan::all();
-        return view('layanan.index',compact ('layanans'));
+        return view('layanan.index', compact('layanans'));
     }
 
     /**
@@ -21,7 +21,7 @@ class LayananController extends Controller
      */
     public function create()
     {
-        return view ('layanan.create');
+        return view('layanan.create');
     }
 
     /**
@@ -29,11 +29,32 @@ class LayananController extends Controller
      */
     public function store(Request $request)
     {
-       Layanan::create([
-        'nama_layanan' => $request -> nama_layanan,
-        'harga_per_kg' => $request -> harga_per_kg
-       ]);
-       return redirect ('/layanan');
+        try {
+            $request->validate(
+                [
+                    'nama_layanan' => 'unique:tb_layanan,nama_layanan',
+                ],
+                [
+                    'nama_layanan.unique' => 'data sudah ada'
+                ]
+            );
+            Layanan::create([
+                'nama_layanan' => $request->nama_layanan,
+                'harga_per_kg' => $request->harga_per_kg
+            ]);
+            return redirect('/layanan');
+
+        } catch (\Exception $th) {
+            return back()->with('error', $th->getMessage())->withInput();
+        }
+
+
+
+        //    Layanan::create([
+        //     'nama_layanan' => $request -> nama_layanan,
+        //     'harga_per_kg' => $request -> harga_per_kg
+        //    ]);
+        return redirect('/layanan')->with('tambah', 'Data Berhasil Ditambah');
     }
 
     /**
@@ -49,8 +70,8 @@ class LayananController extends Controller
      */
     public function edit(string $id)
     {
-        $layananz = Layanan::where('id_layanan',$id)->first();
-        return view ('layanan.edit',compact('layananz'));
+        $layananz = Layanan::where('id_layanan', $id)->first();
+        return view('layanan.edit', compact('layananz'));
     }
 
     /**
@@ -58,12 +79,14 @@ class LayananController extends Controller
      */
     public function update(Request $request, string $id)
     {
-       Layanan::where('id_layanan',$id
-       )->update([
-        'nama_layanan' => $request -> nama_layanan,
-        'harga_per_kg' => $request -> harga_per_kg,
-       ]);
-       return redirect ('/layanan');
+        Layanan::where(
+            'id_layanan',
+            $id
+        )->update([
+                    'nama_layanan' => $request->nama_layanan,
+                    'harga_per_kg' => $request->harga_per_kg,
+                ]);
+        return redirect('/layanan')->with('edit');
     }
 
     /**
@@ -71,7 +94,7 @@ class LayananController extends Controller
      */
     public function destroy(string $id)
     {
-        $deleted = Layanan::where('id_layanan',$id)->delete();
-        return redirect ('/layanan');
+        $deleted = Layanan::where('id_layanan', $id)->delete();
+        return redirect('/layanan')->with('delete', 'Data Berhasil Dihapus');
     }
 }

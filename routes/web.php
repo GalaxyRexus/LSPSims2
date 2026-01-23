@@ -17,10 +17,12 @@ Route::post('/layanan/update/{id}',[App\Http\Controllers\LayananController::clas
 Route::get('/transaksi',[App\Http\Controllers\TransaksiController::class,'index']);
 Route::get('/transaksi/create',[App\Http\Controllers\TransaksiController::class,'create']);
 Route::post('/transaksi/store',[App\Http\Controllers\TransaksiController::class,'store'])->name('transaksi.store');
-Route::get('/transaksi/edit/{id}',[App\Http\Controllers\TransaksiController::class,'edit']);
+Route::get('/transaksi/edit/{id}',[App\Http\Controllers\TransaksiController::class,'edit'])->name('transaksi.edit');
 Route::post('/transaksi/update/{id}',[App\Http\Controllers\TransaksiController::class,'update']);
 Route::get('/transaksi/destroy/{id}',[App\Http\Controllers\TransaksiController::class,'destroy']);
 Route::get('/transaksi/struk/{id}',[App\Http\Controllers\TransaksiController::class,'struk']);
+
+Route::get('/transaksi/bayar/{id}',[App\Http\Controllers\TransaksiController::class,'bayar']);
 
 
 // Route::get('/transaksi/edit',[App\Http\Controllers\TransaksiController::class,'edit']);

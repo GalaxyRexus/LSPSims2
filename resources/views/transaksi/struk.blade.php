@@ -140,4 +140,12 @@
         </div>
     </div>
 </body>
+<script>
+    print();
+    window.addEventListener("load", () =>{
+        window.onafterprint = function() {
+            history.back();
+        }
+    })
+</script>
 </html>

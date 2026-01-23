@@ -43,14 +43,12 @@
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/layanan">
-                            <i class="align-middle" data-feather="coffee"></i> <span
-                                class="align-middle">Layanan</span>
+                            <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Layanan</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/transaksi">
-                            <i class="align-middle" data-feather="book"></i> <span
-                                class="align-middle">Transaksi</span>
+                            <i class="align-middle" data-feather="book"></i> <span class="align-middle">Transaksi</span>
                         </a>
                     </li>
             </div>
@@ -72,8 +70,8 @@
                     <div class="row text-muted">
                         <div class="col-6 text-start">
                             <p class="mb-0">
-                                <a class="text-muted" href="https://adminkit.io/"
-                                    target="_blank"><strong>LSP Pemrograman Web</strong></a> - <a class="text-muted"></a>
+                                <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>LSP
+                                        Pemrograman Web</strong></a> - <a class="text-muted"></a>
                             </p>
                         </div>
                         <div class="col-6 text-end">
@@ -88,11 +86,46 @@
     <script src="jquery/jquery-3.7.1.min.js"></script>
     <script src="datatable/datatables.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-
+    <script src="/js/sweetalert2.js"></script>
     <script src="js/app.js"></script>
     <script>
-        new DataTable ('#myTable');
+        new DataTable('#myTable');
     </script>
+    @session('tambah')
+        <script>
+            Swal.fire({
+                title: "Keren !",
+                text: "Data Berhasil Ditambah !",
+                icon: "success"
+            });
+        </script>
+    @endsession
+    @session('delete')
+        <script>
+            Swal.fire({
+                title: "Hore !",
+                text: "Data Berhasil Dihapus!",
+                icon: "success"
+            });
+        </script>
+    @endsession
+    @session('edit')
+        <script>
+            Swal.fire({
+                title: "Hore !",
+                text: "Data Berhasil Di Ubah!",
+                icon: "success"
+            });
+        </script>
+    @endsession
+    @session('error')
+        <script>
+            Swal.fire({
+                title: "Data Sudah Ada Dan Tidak Bisa Di Tambah Lagi !",
+                icon: "error"
+            });
+        </script>
+    @endsession
 </body>
 
 </html>

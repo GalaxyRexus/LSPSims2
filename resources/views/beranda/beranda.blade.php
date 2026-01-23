@@ -81,7 +81,7 @@
                                 <td>1</td>
                                 <td class="d-none d-xl-table-cell">{{ $item -> nama_pelanggan }}</td>
                                 <td class="d-none d-xl-table-cell">{{ $item -> layanan -> nama_layanan }}</td>
-                                <td><span class="badge bg-success">{{ $item -> berat }}</span></td>
+                                <td><span class="badge bg-success">{{ $item -> berat }}Kg</span></td>
                                 <td class="d-none d-md-table-cell">{{ date('d-m-Y',strtotime($item -> waktu_transaksi) ) }}</td>
                                 <td class="d-none d-md-table-cell">{{ $item -> pembayaran }}</td>
                             </tr>

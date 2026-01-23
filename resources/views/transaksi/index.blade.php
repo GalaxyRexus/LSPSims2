@@ -32,15 +32,23 @@
                                 <td class="d-none d-xl-table-cell">{{ date('d-m-Y',strtotime($item -> waktu_transaksi)) }}</td>
                                 <td class="d-none d-xl-table-cell">{{ $item -> nama_pelanggan }}</td>
                                 <td class="d-none d-xl-table-cell">{{ $item -> layanan -> nama_layanan }}</td>
-                                <td class="d-none d-xl-table-cell">{{ $item -> berat }}</td>
-                                <td><span class="badge bg-warning">{{ $item -> layanan -> harga_per_kg }}</span></td>
-                                <td><span class="badge bg-success">{{ $item -> layanan -> harga_per_kg * $item -> berat }}</span></td>
+                                <td class="d-none d-xl-table-cell">{{ $item -> berat }}Kg</td>
+                                <td><span class="badge bg-warning">Rp{{ number_format($item -> layanan -> harga_per_kg,0,'.','.') }}</span></td>
+                                <td><span class="badge bg-success">Rp{{ number_format($item -> layanan -> harga_per_kg * $item -> berat,0,'.','.') }}</span></td>
                                 <td><span class="badge bg-success">{{ $item -> keterangan }}</span></td>
-                                <td><span class="badge bg-success">{{ $item -> pembayaran }}</span></td>
+                                <td>
+                                    @if( $item -> pembayaran  == 'Lunas')
+                                    {{ $item -> pembayaran }}<br>
+                                    @endif
+                                    @if ($item -> pembayaran == 'Belum Bayar')
+                                    {{ $item -> pembayaran }}
+                                    <a href="transaksi/bayar/{{ $item -> id_transaksi }}" class="btn btn-success btn-sm">Bayar</a>
+                                    @endif
+                                </td>
                                 <td class="d-none d-md-table-cell">
                                     <a class="btn btn-primary" href="transaksi/edit/{{ $item -> id_transaksi }}">Ubah</a>
-                                    <a class="btn btn-danger" href="/transaksi/destroy/{{ $item -> id_transaksi }}">Hapus</a>
-                                    <a class="btn btn-warning" href="/transaksi/struk/{{ $item -> id_transaksi }}">Struk</a>
+                                    <a class="btn btn-danger" onclick="return confirm('Apakah Ingin Menghapus Data ?')" href="/transaksi/destroy/{{ $item -> id_transaksi }}">Hapus</a>
+                                    <a class="btn btn-warning"  href="/transaksi/struk/{{ $item -> id_transaksi }}">Struk</a>
                                 </td>
                             </tr>
                             @endforeach

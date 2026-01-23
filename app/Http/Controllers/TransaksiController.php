@@ -27,6 +27,13 @@ class TransaksiController extends Controller
         return view ('transaksi.create',compact('layanan'));
     }
 
+    public function bayar( Request $request, string $id){
+        $transaksi = Transaksi::where('id_transaksi',$id)->first();
+        $transaksi -> pembayaran = "Lunas";
+        $transaksi -> save();
+        return redirect ('/transaksi')->with('tambah'); 
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -38,7 +45,7 @@ class TransaksiController extends Controller
             'id_layanan' => $request -> id_layanan,
             'berat' => $request -> berat,
             'keterangan' => $request -> keterangan,
-            'pembayaran' => $request -> pembayaran,
+            'pembayaran' => 'Belum Bayar',
         ]);
         return redirect ('/transaksi');
     }
@@ -57,7 +64,8 @@ class TransaksiController extends Controller
     public function edit(string $id)
     {
         $transaksiz = Transaksi::where('id_transaksi', $id)->first();
-        return view ('transaksi/edit',compact('transaksiz'));
+        $layanans = Layanan::all();
+        return view ('transaksi/edit',compact('transaksiz','layanans'));
     }
 
     /**
@@ -74,7 +82,7 @@ class TransaksiController extends Controller
             'keterangan' => $request -> keterangan,
             'pembayaran' => $request -> pembayaran,
         ]);
-        return redirect('/transaksi');
+        return redirect('/transaksi')->with('edit');
     }
 
     /**
@@ -83,7 +91,7 @@ class TransaksiController extends Controller
     public function destroy(string $id)
     {
         $deleted = Transaksi::where('id_transaksi',$id)->delete();
-        return redirect ('/transaksi');
+        return redirect ('/transaksi')->with('delete');
     }
 
     public function struk(string $id){
