@@ -73,26 +73,11 @@
                         <div class="col-6 text-start">
                             <p class="mb-0">
                                 <a class="text-muted" href="https://adminkit.io/"
-                                    target="_blank"><strong>AdminKit</strong></a> - <a class="text-muted"
-                                    href="https://adminkit.io/" target="_blank"><strong>Bootstrap Admin
-                                        Template</strong></a> &copy;
+                                    target="_blank"><strong>LSP Pemrograman Web</strong></a> - <a class="text-muted"></a>
                             </p>
                         </div>
                         <div class="col-6 text-end">
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="https://adminkit.io/" target="_blank">Help Center</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="https://adminkit.io/" target="_blank">Privacy</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
-                                </li>
-                            </ul>
+                            <a text-muted> Cendy Alviano</a>
                         </div>
                     </div>
                 </div>
@@ -105,6 +90,9 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
 
     <script src="js/app.js"></script>
+    <script>
+        new DataTable ('#myTable');
+    </script>
 </body>
 
 </html>

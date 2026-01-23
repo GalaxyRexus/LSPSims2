@@ -10,8 +10,9 @@
                         <h5 class="card-title mb-0">Latest Projects</h5>
                         <div class="text-end"><a class="btn btn-success" href="/layanan/create">Tambah</a></div>
                     </div>
-                    <table class="table table-hover my-0">
+                    <table class="table table-hover my-0" id="myTable">
                         <thead>
+                            
                             <tr>
                                 <th>No</th>
                                 <th class="d-none d-xl-table-cell">Layanan</th>
@@ -20,42 +21,17 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($layanans as $item)
                             <tr>
-                                <td>1</td>
-                                <td class="d-none d-xl-table-cell">Cuci Setrika</td>
-                                <td><span class="badge bg-success">Rp. 5.000</span></td>
+                                <td>{{  $loop->iteration }}</td>
+                                <td class="d-none d-xl-table-cell">{{ $item -> nama_layanan }}</td>
+                                <td><span class="badge bg-success">Rp{{ number_format($item -> harga_per_kg,0,',',',') }}</span></td>
                                 <td class="d-none d-md-table-cell">
-                                    <a class="btn btn-primary">Ubah</a>
-                                    <a class="btn btn-danger">Hapus</a>
+                                    <a class="btn btn-primary" href="/layanan/edit/{{ $item -> id_layanan }}">Ubah</a>
+                                    <a class="btn btn-danger" href="/layanan/destroy/{{$item -> id_layanan }}">Hapus</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td class="d-none d-xl-table-cell">Cuci Saja</td>
-                                <td><span class="badge bg-success">Rp. 3.000</span></td>
-                                <td class="d-none d-md-table-cell">
-                                    <a class="btn btn-primary">Ubah</a>
-                                    <a class="btn btn-danger">Hapus</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td class="d-none d-xl-table-cell">Setrika Saja</td>
-                                <td><span class="badge bg-success">Rp. 2.000</span></td>
-                                <td class="d-none d-md-table-cell">
-                                    <a class="btn btn-primary">Ubah</a>
-                                    <a class="btn btn-danger">Hapus</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td class="d-none d-xl-table-cell">Express 12 Jam</td>
-                                <td><span class="badge bg-success">Rp. 8.000</span></td>
-                                <td class="d-none d-md-table-cell">
-                                    <a class="btn btn-primary">Ubah</a>
-                                    <a class="btn btn-danger">Hapus</a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

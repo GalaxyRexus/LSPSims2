@@ -12,7 +12,7 @@
                                     <h3 class="card-title">Jumlah Layanan</h3>
                                 </div>
                             </div>
-                            <h1 class="mt-1 mb-3">5</h1>
+                            <h1 class="mt-1 mb-3">{{ $jumlay }}</h1>
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                                     <h5 class="card-title">Transaksi Baru</h5>
                                 </div>
                             </div>
-                            <h1 class="mt-1 mb-3">3</h1>
+                            <h1 class="mt-1 mb-3">{{ $jumtrans }}</h1>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                                     <h5 class="card-title">Sedang Diproses</h5>
                                 </div>
                             </div>
-                            <h1 class="mt-1 mb-3">2</h1>
+                            <h1 class="mt-1 mb-3">{{ $sedpros }}</h1>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
 
                         <h5 class="card-title mb-0">Latest Projects</h5>
                     </div>
-                    <table class="table table-hover my-0">
+                    <table class="table table-hover my-0" id="myTable">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -75,20 +75,15 @@
                         </thead>
                         <tbody>
                             <tr>
+                                @foreach ($transaksis as $item)
+                                
+                                @endforeach
                                 <td>1</td>
-                                <td class="d-none d-xl-table-cell">Warsini</td>
-                                <td class="d-none d-xl-table-cell">Cuci Setrika</td>
-                                <td><span class="badge bg-success">10kg</span></td>
-                                <td class="d-none d-md-table-cell">12 Feb 2024</td>
-                                <td class="d-none d-md-table-cell">Belum Bayar</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td class="d-none d-xl-table-cell">Warsito</td>
-                                <td class="d-none d-xl-table-cell">Cuci Saja</td>
-                                <td><span class="badge bg-success">5kg</span></td>
-                                <td class="d-none d-md-table-cell">11 Feb 2024</td>
-                                <td class="d-none d-md-table-cell">Lunas</td>
+                                <td class="d-none d-xl-table-cell">{{ $item -> nama_pelanggan }}</td>
+                                <td class="d-none d-xl-table-cell">{{ $item -> layanan -> nama_layanan }}</td>
+                                <td><span class="badge bg-success">{{ $item -> berat }}</span></td>
+                                <td class="d-none d-md-table-cell">{{ date('d-m-Y',strtotime($item -> waktu_transaksi) ) }}</td>
+                                <td class="d-none d-md-table-cell">{{ $item -> pembayaran }}</td>
                             </tr>
                         </tbody>
                     </table>

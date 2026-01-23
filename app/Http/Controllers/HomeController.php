@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Transaksi;
+use App\Models\Layanan;
 
 class HomeController extends Controller
 {
@@ -11,7 +13,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view ('beranda.beranda');
+        $transaksis = Transaksi::all();
+        $jumlay = Layanan::count();
+        $jumtrans = Transaksi::count();
+
+        $sedpros = Transaksi::where('keterangan', 'Proses')->count();
+        $belbay = Transaksi::where('pembayaran','Belum Bayar')->count();
+        return view ('beranda.beranda',compact('jumlay','jumtrans','sedpros','transaksis','belbay'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Layanan;
 
 class LayananController extends Controller
 {
@@ -11,7 +12,8 @@ class LayananController extends Controller
      */
     public function index()
     {
-        return view('layanan.index');
+        $layanans = Layanan::all();
+        return view('layanan.index',compact ('layanans'));
     }
 
     /**
@@ -27,7 +29,11 @@ class LayananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       Layanan::create([
+        'nama_layanan' => $request -> nama_layanan,
+        'harga_per_kg' => $request -> harga_per_kg
+       ]);
+       return redirect ('/layanan');
     }
 
     /**
@@ -43,7 +49,8 @@ class LayananController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $layananz = Layanan::where('id_layanan',$id)->first();
+        return view ('layanan.edit',compact('layananz'));
     }
 
     /**
@@ -51,7 +58,12 @@ class LayananController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       Layanan::where('id_layanan',$id
+       )->update([
+        'nama_layanan' => $request -> nama_layanan,
+        'harga_per_kg' => $request -> harga_per_kg,
+       ]);
+       return redirect ('/layanan');
     }
 
     /**
@@ -59,6 +71,7 @@ class LayananController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $deleted = Layanan::where('id_layanan',$id)->delete();
+        return redirect ('/layanan');
     }
 }

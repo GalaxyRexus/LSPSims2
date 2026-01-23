@@ -10,7 +10,7 @@
                         <h5 class="card-title mb-0">Transaksi</h5>
                          <div class="text-end"><a class="btn btn-success" href="/transaksi/create">Tambah</a></div>
                     </div>
-                    <table class="table table-hover my-0">
+                    <table class="table table-hover my-0" id="myTable">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -26,37 +26,24 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($transaksis as $item)
                             <tr>
-                                <td>1</td>
-                                <td class="d-none d-xl-table-cell">11-2-2024</td>
-                                <td class="d-none d-xl-table-cell">Warsito</td>
-                                <td class="d-none d-xl-table-cell">Cuci Saja</td>
-                                <td class="d-none d-xl-table-cell">5kg</td>
-                                <td><span class="badge bg-warning">Rp3.000</span></td>
-                                <td><span class="badge bg-success">Rp15.000</span></td>
-                                <td><span class="badge bg-success">Selesai</span></td>
-                                <td><span class="badge bg-success">Lunas</span></td>
+                                <td>{{ $loop -> iteration }}</td>
+                                <td class="d-none d-xl-table-cell">{{ date('d-m-Y',strtotime($item -> waktu_transaksi)) }}</td>
+                                <td class="d-none d-xl-table-cell">{{ $item -> nama_pelanggan }}</td>
+                                <td class="d-none d-xl-table-cell">{{ $item -> layanan -> nama_layanan }}</td>
+                                <td class="d-none d-xl-table-cell">{{ $item -> berat }}</td>
+                                <td><span class="badge bg-warning">{{ $item -> layanan -> harga_per_kg }}</span></td>
+                                <td><span class="badge bg-success">{{ $item -> layanan -> harga_per_kg * $item -> berat }}</span></td>
+                                <td><span class="badge bg-success">{{ $item -> keterangan }}</span></td>
+                                <td><span class="badge bg-success">{{ $item -> pembayaran }}</span></td>
                                 <td class="d-none d-md-table-cell">
-                                    <a class="btn btn-primary">Ubah</a>
-                                    <a class="btn btn-danger">Hapus</a>
+                                    <a class="btn btn-primary" href="transaksi/edit/{{ $item -> id_transaksi }}">Ubah</a>
+                                    <a class="btn btn-danger" href="/transaksi/destroy/{{ $item -> id_transaksi }}">Hapus</a>
+                                    <a class="btn btn-warning" href="/transaksi/struk/{{ $item -> id_transaksi }}">Struk</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td class="d-none d-xl-table-cell">11-2-2024</td>
-                                <td class="d-none d-xl-table-cell">Warsini</td>
-                                <td class="d-none d-xl-table-cell">Cuci Setrika</td>
-                                <td class="d-none d-xl-table-cell">10kg</td>
-                                <td><span class="badge bg-warning">Rp5.000</span></td>
-                                <td><span class="badge bg-success">Rp50.000</span></td>
-                                <td><span class="badge bg-primary">Proses</span></td>
-                                <td><span class="badge bg-danger">Belum Bayar</span></td>
-                                <td class="d-none d-md-table-cell">
-                                    <a class="btn btn-primary">Ubah</a>
-                                    <a class="btn btn-danger">Hapus</a>
-                                </td>
-                            </tr>
-                            
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
